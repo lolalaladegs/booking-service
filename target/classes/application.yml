@@ -1,0 +1,31 @@
+server:
+  port: 7001
+
+spring:
+  application:
+    name: booking-service
+
+  data:
+    mongodb:
+      uri: mongodb://${app.mongodb.host}:${app.mongodb.port}/${app.mongodb.database}
+      field-naming-strategy: org.springframework.data.mapping.model.SnakeCaseFieldNamingStrategy
+      auto-index-creation: true
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/bookdb
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    baseline-version: 0.0
+    locations: classpath:db/migration/{vendor}
+
+app:
+  mongodb:
+    host: localhost
+    port: 27017
+    database: bookdb
